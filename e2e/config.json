@@ -1,0 +1,9 @@
+{
+    "preset": "react-native",
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": ["./init.js"],
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/e2e/.*"
+    ]
+  }
