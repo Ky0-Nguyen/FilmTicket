@@ -16,6 +16,9 @@ const BookedScreen = () => {
       data={booked}
       renderItem={renderItem}
       keyExtractor={(item) => item.id}
+      initialNumToRender={10}
+      maxToRenderPerBatch={10}
+      windowSize={5}
     />
   );
 }

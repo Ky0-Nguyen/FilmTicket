@@ -49,26 +49,6 @@ const filmSlice = createSlice({
     addBooked(state, action: PayloadAction<FilmType>) {
       state.booked.push(action.payload);
     },
-    // toggleFavorite: (state, action: PayloadAction<string>) => {
-    //     const film = state.list.find((film) => film.id === action.payload);
-    //     if (film) {
-    //       film.isFavorited = !film.isFavorited;
-    //       if (film.isFavorited) {
-    //         state.favorites.push(film);
-    //       } else {
-    //         state.favorites = state.favorites.filter(
-    //           (favorite) => favorite.id !== action.payload
-    //         );
-    //       }
-    //     }
-    //   },    
-    //   bookFilm: (state, action: PayloadAction<string>) => {
-    //     const film = state.list.find((film) => film.id === action.payload);
-    //     if (film && !film.isBooked) {
-    //       film.isBooked = true;
-    //       state.booked.push(film);
-    //     }
-    //   },
   },
 });
 

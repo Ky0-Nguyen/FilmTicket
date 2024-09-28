@@ -1,4 +1,4 @@
-import { Button, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from 'store';
@@ -6,9 +6,10 @@ import { addBooked, saveBookedToStorage } from 'store/reducer/film.reducer';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 type BookingScreenProps = {
-  navigation: any
-  route: any
+  navigation: any;
+  route: any;
 };
+
 const BookingScreen = ({ navigation, route }: BookingScreenProps) => {
   const { film } = route.params;
   const dispatch = useDispatch<AppDispatch>();

@@ -12,7 +12,14 @@ const FavoriteScreen = () => {
     );
 
     return (
-        <FlatList data={favorites} keyExtractor={(item) => item.id} renderItem={renderItem} />
+        <FlatList
+            data={favorites}
+            keyExtractor={(item) => item.id}
+            renderItem={renderItem}
+            initialNumToRender={10}
+            maxToRenderPerBatch={10}
+            windowSize={5}
+        />
     );
 }
 

@@ -1,3 +1,5 @@
+import { NavigationProp } from "@react-navigation/native";
+
 export type FilmType = {
     id: string;
     title: string;
@@ -8,6 +10,6 @@ export type FilmType = {
 }
 
 export type RootStackParamList = {
-    Booking: { film: FilmType };
+    Booking: any;
     Booked: undefined
 };
