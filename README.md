@@ -104,3 +104,37 @@ End-to-end tests using Detox.
 
 This structure promotes separation of concerns, making it easier to locate and maintain different parts of the application. Each module can be developed and tested independently, improving scalability and collaboration among team members.
 
+
+## Running Detox Tests
+
+To run end-to-end tests using Detox, follow these steps:
+
+1. Ensure you have Detox installed globally:
+   ```
+   npm install -g detox-cli
+   ```
+
+2. Build the app for testing:
+   - For iOS:
+     ```
+     detox build --configuration ios.sim.debug
+     ```
+   - For Android:
+     ```
+     detox build --configuration android.emu.debug
+     ```
+
+3. Run the tests:
+   - For iOS:
+     ```
+     detox test --configuration ios.sim.debug
+     ```
+   - For Android:
+     ```
+     detox test --configuration android.emu.debug
+     ```
+
+Make sure you have the necessary emulators or simulators set up before running the tests. Refer to the `.detoxrc.js` file for configuration details.
+
+For more information on Detox and its capabilities, visit the [official Detox documentation](https://wix.github.io/Detox/).
+
