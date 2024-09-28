@@ -1,8 +1,6 @@
 import React from 'react'
-import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native'
+import { FlatList } from 'react-native'
 import { saveFavoritesToStorage, addFavorite } from 'store/reducer/film.reducer';
-import { findIndex } from 'lodash';
-import styles from './styles';
 import { FilmType } from 'core/type';
 import { useListFilmFunctions } from './useFunctions';
 import { FilmCard } from 'components';
@@ -11,14 +9,21 @@ type Props = {
   navigation: any
 }
 
+
+
 const ListFilmScreen = (props: Props) => {
   const { navigation } = props
-  const { dispatch, bookedFilms, films, favoriteFilms, checkBooked, checkFavorited } = useListFilmFunctions()
+  const { dispatch, films, favoriteFilms, checkBooked, checkFavorited } = useListFilmFunctions()
 
   const renderItem = ({ item }: { item: FilmType }) => {
     const onLike = () => {
-      saveFavoritesToStorage([...favoriteFilms, item])
-      dispatch(addFavorite(item));
+      if (checkFavorited(item)) {
+        return
+      } else {
+        saveFavoritesToStorage([...favoriteFilms, item])
+        dispatch(addFavorite(item));
+      }
+
     }
     const onBook = () => {
       checkBooked(item)
@@ -36,8 +41,9 @@ const ListFilmScreen = (props: Props) => {
   return (
     <FlatList
       data={films}
-      keyExtractor={(item) => item.id}
+      testID='filmList'
       renderItem={renderItem}
+      keyExtractor={(item) => item.id}
     />
   )
 }

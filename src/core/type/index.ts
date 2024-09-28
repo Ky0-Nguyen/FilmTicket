@@ -6,3 +6,8 @@ export type FilmType = {
     isBooked: boolean;
     isFavorited: boolean;
 }
+
+export type RootStackParamList = {
+    Booking: { film: FilmType };
+    Booked: undefined
+};

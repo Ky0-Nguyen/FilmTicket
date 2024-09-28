@@ -1,17 +1,14 @@
-import { FlatList, Image, StyleSheet, Text, View } from 'react-native'
+import { FlatList, StyleSheet } from 'react-native'
 import React from 'react'
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
 import { FilmType } from 'core/type';
-
+import { FilmCard } from 'components';
 
 const FavoriteScreen = () => {
     const favorites: FilmType[] = useSelector((state: RootState) => state.films.favorites);
     const renderItem = ({ item }: { item: FilmType }) => (
-        <View style={styles.itemContainer}>
-            <Image source={{ uri: item.imageUrl }} style={styles.image} />
-            <Text>{item.title}</Text>
-        </View>
+        <FilmCard haveButton={false} film={item} />
     );
 
     return (

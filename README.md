@@ -77,3 +77,30 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+
+
+
+## Project Structure
+
+This React Native project follows a modular structure to enhance organization and maintainability. Here's an overview of the main directories and their purposes:
+
+### `/src`
+The main source code directory.
+
+- `/components`: Reusable UI components used across the app.
+- `/modules`: Feature-specific modules, each containing its own components, screens, and logic.
+  - `/home`: Home module, including the list of films.
+    - `/list`: Components and logic for the film list.
+- `/navigation`: Navigation-related files, including the root navigator.
+- `/store`: Redux store configuration and reducers.
+- `/core`: Core utilities, types, and constants.
+
+### `/e2e`
+End-to-end tests using Detox.
+
+### Root Files
+- `index.js`: The entry point of the application.
+- `App.tsx`: The root component that sets up the Redux provider and navigation.
+
+This structure promotes separation of concerns, making it easier to locate and maintain different parts of the application. Each module can be developed and tested independently, improving scalability and collaboration among team members.
+

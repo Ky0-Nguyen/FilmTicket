@@ -1,10 +1,8 @@
-import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { BookingScreen, ListFilmScreen, FavoriteScreen, BookedScreen } from '../modules';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-type Props = {}
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { BookingScreen, ListFilmScreen, FavoriteScreen, BookedScreen } from 'modules';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator()
@@ -29,5 +27,3 @@ const RootNavigator = () => {
 }
 
 export default RootNavigator
-
-const styles = StyleSheet.create({})
