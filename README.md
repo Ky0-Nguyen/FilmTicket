@@ -138,3 +138,22 @@ Make sure you have the necessary emulators or simulators set up before running t
 
 For more information on Detox and its capabilities, visit the [official Detox documentation](https://wix.github.io/Detox/).
 
+
+## Demo
+
+### iOS Simulator Demo
+
+Check out our iOS simulator demo to see the app in action:
+
+[![iOS Simulator Demo](https://img.youtube.com/vi/5uaLKH8eDT0/0.jpg)](https://youtube.com/shorts/5uaLKH8eDT0?feature=share)
+
+This short video showcases the main features of our app running on an iOS simulator, giving you a quick overview of the user interface and functionality.
+
+### Detox Test Demo
+
+Watch our Detox test demo to see how we ensure the quality and reliability of our app:
+
+[![Detox Test Demo](https://img.youtube.com/vi/A24aKIIfHhU/0.jpg)](https://youtu.be/A24aKIIfHhU)
+
+This video demonstrates our end-to-end testing process using Detox, highlighting how we automate UI testing to catch potential issues and ensure a smooth user experience.
+
