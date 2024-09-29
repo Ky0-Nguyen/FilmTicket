@@ -1,4 +1,23 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Film Ticket Booking App
+
+This is a [**React Native**](https://reactnative.dev) application designed for film ticket booking. The project was bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+
+## Key Features
+
+- Display film listings
+- Book film tickets
+- Manage favorite films
+
+## Technologies Used
+
+- React Native
+- Redux Saga
+- React Navigation
+- Detox (for end-to-end testing)
+
+## Installation and Running the App
+
+Please follow the steps in the "Getting Started" section below to install and run the application.
 
 # Getting Started
 
@@ -156,4 +175,41 @@ Watch our Detox test demo to see how we ensure the quality and reliability of ou
 [![Detox Test Demo](https://img.youtube.com/vi/A24aKIIfHhU/0.jpg)](https://youtu.be/A24aKIIfHhU)
 
 This video demonstrates our end-to-end testing process using Detox, highlighting how we automate UI testing to catch potential issues and ensure a smooth user experience.
+
+
+## Redux Implementation
+
+Our application utilizes Redux for state management, with a recent migration from Redux Thunk to Redux Saga for handling asynchronous operations. This transition enhances our ability to manage complex side effects and improves the overall architecture of our application.
+
+### Key Points:
+
+1. **State Management**: Redux maintains a centralized store for our application state, ensuring consistency across components.
+
+2. **Action Creators**: We use action creators to dispatch actions that trigger state changes. For example:
+
+   ```javascript
+   dispatch(fetchFilms())
+   dispatch({ type: 'LOAD_MOVIES_FROM_STORAGE' });
+   ```
+
+3. **Reducers**: Our reducers handle these actions and update the state accordingly. The film reducer manages states like `list`, `loading`, `error`, `favorites`, and `booked`.
+
+4. **Redux Saga**: We've implemented saga middleware to handle side effects. For instance:
+
+   ```javascript
+   function* fetchFilmsSaga() {
+     try {
+       const films: FilmType[] = yield call(generateFilmData);
+       yield put(fetchFilmsSuccess(films));
+     } catch (error: unknown) {
+       // Error handling
+     }
+   }
+   ```
+
+   This saga manages the asynchronous fetching of film data.
+
+5. **Selectors**: We use selectors to efficiently access and compute derived data from the Redux store.
+
+By transitioning to Redux Saga, we've improved our ability to test and manage complex asynchronous flows, making our application more robust and maintainable.
 
