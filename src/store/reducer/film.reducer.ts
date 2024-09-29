@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { faker } from '@faker-js/faker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FilmType } from 'core/type';
 
@@ -7,33 +6,37 @@ type FilmState = {
   list: FilmType[];
   favorites: FilmType[];
   booked: FilmType[];
+  loading: boolean,
+  error: any,
 }
 
-const generateFilmData = (count: number = 1000): FilmType[] => {
-  let films: FilmType[] = [];
-  for (let i = 0; i < count; i++) {
-    films.push({
-      id: faker.string.uuid(),
-      title: faker.lorem.sentence(),
-      description: faker.lorem.paragraph(),
-      imageUrl: faker.image.url(),
-      isBooked: false,
-      isFavorited: false,
-    });
-  }
-  return films;
-};
+
 
 const initialState: FilmState = {
   list: [],
   favorites: [],
   booked: [],
+  loading: false,
+  error: null,
 };
 
 const filmSlice = createSlice({
   name: 'films',
   initialState,
   reducers: {
+    fetchFilms: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    fetchFilmsSuccess: (state, action: PayloadAction<FilmType[]>) => {
+      state.list = action.payload;
+      state.loading = false;
+      state.error = null;
+    },
+    fetchFilmsFailure: (state, action: PayloadAction<string>) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
     setFilms: (state, action: PayloadAction<FilmType[]>) => {
       state.list = action.payload;
     },
@@ -69,7 +72,15 @@ export const saveBookedToStorage = async (booked: FilmType[]) => {
     console.error('Failed to save booked to AsyncStorage', e);
   }
 };
-export const { setFilms, setBooked, addBooked, setFavorites, addFavorite } = filmSlice.actions;
+export const {
+  setFilms,
+  setBooked,
+  addBooked,
+  setFavorites,
+  addFavorite,
+  fetchFilms,
+  fetchFilmsSuccess,
+  fetchFilmsFailure, } = filmSlice.actions;
 export const loadMoviesFromStorage = async (dispatch: (arg0: any) => void) => {
   try {
     const favoritesJson = await AsyncStorage.getItem('@favorites');
@@ -91,7 +102,8 @@ export const loadMoviesFromStorage = async (dispatch: (arg0: any) => void) => {
 
 export default filmSlice.reducer;
 
-export const fetchFilms = (dispatch: any) => {
-  const films = generateFilmData();
-  dispatch(setFilms(films));
-};
+// apply Thunk but I changing to Saga
+// export const fetchFilms = (dispatch: any) => {
+//   const films = generateFilmData();
+//   dispatch(setFilms(films));
+// };

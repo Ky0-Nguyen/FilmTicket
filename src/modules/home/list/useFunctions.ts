@@ -2,18 +2,17 @@ import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store";
 import { fetchFilms } from "store/reducer";
-import { loadMoviesFromStorage } from "store/reducer/film.reducer";
 import { FilmType } from "core/type";
 import { findIndex } from "lodash";
 
 export const useListFilmFunctions = () => {
     const dispatch = useDispatch();
-    const films = useSelector((state: RootState) => state.films.list)
-    const favoriteFilms = useSelector((state: RootState) => state.films.favorites) || []
-    const bookedFilms = useSelector((state: RootState) => state.films.booked) || []
+    const { list: films, loading, error,
+        favorites: favoriteFilms, booked: bookedFilms } = useSelector((state: RootState) => state.films);
     useEffect(() => {
-        fetchFilms(dispatch)
-        loadMoviesFromStorage(dispatch)
+        dispatch(fetchFilms())
+        // loadMoviesFromStorage(dispatch)
+        dispatch({ type: 'LOAD_MOVIES_FROM_STORAGE' });
     }, [dispatch]);
 
     const checkFavorited = useCallback((film: FilmType) => {
@@ -25,7 +24,7 @@ export const useListFilmFunctions = () => {
     }, [bookedFilms])
 
     return {
-        films, favoriteFilms, bookedFilms,
+        films, favoriteFilms, bookedFilms, error, loading,
         dispatch, checkFavorited, checkBooked
     }
 }

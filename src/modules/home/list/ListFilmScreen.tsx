@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, StyleSheet, Text, View } from 'react-native'
 import { saveFavoritesToStorage, addFavorite } from 'store/reducer/film.reducer';
 import { FilmType, RootStackParamList } from 'core/type';
 import { useListFilmFunctions } from './useFunctions';
@@ -12,7 +12,10 @@ type Props = {
 
 const ListFilmScreen = (props: Props) => {
   const { navigation } = props;
-  const { dispatch, films, favoriteFilms, checkBooked, checkFavorited } = useListFilmFunctions();
+  const { dispatch, films, favoriteFilms, checkBooked, checkFavorited,
+    error, loading,
+
+   } = useListFilmFunctions();
 
   const renderItem = ({ item }: { item: FilmType }) => {
     const onLike = () => {
@@ -37,6 +40,22 @@ const ListFilmScreen = (props: Props) => {
       film={item}
     />
   };
+
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <Text>Đang tải...</Text>
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.container}>
+        <Text>Lỗi: {error}</Text>
+      </View>
+    );
+  }
   return (
     <FlatList
       data={films}
@@ -51,3 +70,10 @@ const ListFilmScreen = (props: Props) => {
 }
 
 export default ListFilmScreen
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
